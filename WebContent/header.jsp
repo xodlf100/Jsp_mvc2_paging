@@ -57,7 +57,7 @@
 			%>
 			<div class="header-right">
 				<p class="logRR"><%=idd %>님 환영합니다.</p>
-				<a href="logoutAction.jsp" class="logR">로그아웃</a> 
+				<a href="/logout" class="logR">로그아웃</a> 
 				<a href="mypage.jsp">내정보보기</a>
 			</div>
 			<%
