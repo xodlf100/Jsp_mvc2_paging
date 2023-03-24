@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="showM.Dto.JoinDto"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="showM.Dto.Dto"%>
@@ -5,6 +6,7 @@
 <%@page import="showM.Dao.Dao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%
 	String id = request.getParameter("id");
 %>
@@ -40,7 +42,7 @@
 						<div>MEMBER 회원가입</div>
 						<hr>
 					</div>
-					<form action="./joinAction.jsp" method="post" class="login" name="frm1" onsubmit="return goCheck()">
+					<form action="/join" method="post" class="login" name="frm1" onsubmit="return goCheck()">
 						<div>ID (User name)</div>
 						<div>
 							<input type="text" name="id" class="idInput"/>
@@ -115,22 +117,16 @@
 		return true;
 		
 	}
-	<%
-		Dao dao = new Dao();
-		List<JoinDto> jo = dao.check();
-	%>
+	
+	
+	
+	
 	
 	function idCheck(){
-		
 			var idValue = id.value;
 			
-		
-			<%
-				for(int i=0; i<jo.size() ;i++){ 
-					JoinDto j = jo.get(i);
-			%>
-						
-					if(idValue == '<%=j.getId()%>'){
+				<c:forEach var="check" items="${jo}">	
+					if(idValue == ${check.id}){
 						alert('아이디가 존재합니다.');
 						return
 					}
@@ -139,9 +135,9 @@
 						alert("아이디를 입력해주세요.");
 						return
 					}
-			<%
-				}
-			%>
+				</c:forEach>
+				
+			
 			alert('회원가입이 가능합니다.');
 			flag = true
 	}

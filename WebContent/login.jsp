@@ -4,6 +4,7 @@
 <%@page import="showM.Dao.Dao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +15,7 @@
 <link rel="stylesheet" href="./css/reset.css" />
 <link rel="stylesheet" href="./css/common.css" />
 <link rel="stylesheet" href="./css/login.css" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
 <style>
 	.header {
@@ -46,7 +46,7 @@
 						</div>
 						<div class="join">
 							<input type="submit" value="로그인" class="btn btn-4" /> 
-							<input type="button" class="btn btn-4" value="회원가입" onclick="location.href='join.jsp'">
+							<input type="button" class="btn btn-4" value="회원가입" onclick="location.href='/join'">
 						</div>
 					</form>
 				</div>

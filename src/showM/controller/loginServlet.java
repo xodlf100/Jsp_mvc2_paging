@@ -31,7 +31,8 @@ public class loginServlet extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		Dao dao = new Dao();
 		
 		String id = request.getParameter("id");
@@ -39,27 +40,20 @@ public class loginServlet extends HttpServlet {
 		int result = dao.login(id, password);
 		
 		if(result == 1) {
-			PrintWriter out = response.getWriter();
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*10);
-			
 			out.println("<script>");
-			out.println("alert('로그인 성공')");
+			out.println("alert('로그인 성공!')");
+			out.println("location.href='index.jsp'");
 			out.println("</script>");
-			
-			response.sendRedirect("index.jsp");
-//			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
-////			request.setAttribute("key", value); Dispatcher �� �� �����͸� �ش� �������� �Ѱ��� �� ����
-//			dis.forward(request, response);
-		}
-		if(result == 0){
-			PrintWriter out = response.getWriter();
+		} else {
 			out.println("<script>");
-			out.println("alert('로그인 실패')");
+			out.println("alert('로그인 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
+		
 	}
 		
 }

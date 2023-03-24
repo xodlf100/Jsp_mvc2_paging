@@ -32,7 +32,7 @@
 <body>
 	<div class="sec_header">
 		<div class="header">
-			<h1 class="logo" onclick="location.href='index.jsp'">FLADAY</h1>
+			<h1 class="logo" onclick="location.href='/index'">FLADAY</h1>
 			<div class="find">
 				<form action="search.jsp" method="get" class="hform">
 					<input type="text" class="find2" placeholder="검색어 입력" name="keyword"/>
@@ -41,28 +41,23 @@
 					 </button>
 				 </form>
 			</div>
-			<%
-				if (idd == null) {
-			%>
+			
+			<c:if test="${idd == null}">
 			<div class="header-right">
 				<a href='login.jsp' class="logR">로그인</a>
 				<a href='join.jsp'>회원가입</a>
 			</div>
-			<%
-				}
-			%>
+			</c:if>
+			
 
-			<%
-				if (idd != null) {
-			%>
+			<c:if test="${idd != null}">
 			<div class="header-right">
-				<p class="logRR"><%=idd %>님 환영합니다.</p>
+				<p class="logRR">${idd}님 환영합니다.</p>
 				<a href="/logout" class="logR">로그아웃</a> 
 				<a href="mypage.jsp">내정보보기</a>
 			</div>
-			<%
-				}
-			%>
+			</c:if>
+			
 		</div>
 	</div>
 </body>
