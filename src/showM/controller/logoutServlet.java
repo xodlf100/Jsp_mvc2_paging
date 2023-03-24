@@ -31,7 +31,7 @@ public class logoutServlet extends HttpServlet {
 		session.invalidate();
 		
 		out.println("<script>");
-		out.println("alert('�α׾ƿ� �Ϸ�')");
+		out.println("alert('로그아웃 완료')");
 		out.println("/<script>");
 		
 //		RequestDispatcher dis = request.getRequestDispatcher("index.jsp");

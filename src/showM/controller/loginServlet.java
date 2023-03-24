@@ -45,18 +45,18 @@ public class loginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60*10);
 			
 			out.println("<script>");
-			out.println("alert('·Î±×ÀÎ¿Ï·á')");
+			out.println("alert('ë¡œê·¸ì¸ ì„±ê³µ')");
 			out.println("</script>");
 			
 			response.sendRedirect("index.jsp");
 //			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
-////			request.setAttribute("key", value); Dispatcher ÇÒ ¶§ µ¥ÀÌÅÍ¸¦ ÇØ´ç Çü½ÄÀ¸·Î ³Ñ°ÜÁÙ ¼ö ÀÖÀ½
+////			request.setAttribute("key", value); Dispatcher ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //			dis.forward(request, response);
 		}
 		if(result == 0){
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('·Î±×ÀÎ ½ÇÆĞ')");
+			out.println("alert('ë¡œê·¸ì¸ ì‹¤íŒ¨')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
