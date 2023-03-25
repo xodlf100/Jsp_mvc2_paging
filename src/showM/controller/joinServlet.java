@@ -32,21 +32,11 @@ public class joinServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		Dao dao = new Dao();
-		JoinDto dto = new JoinDto();
 		List<JoinDto> jo = dao.check();
 		
-		dto.setId(request.getParameter("id"));
-		dto.setPassword(request.getParameter("password"));
-		dto.setName(request.getParameter("name"));
-		dto.setEmail(request.getParameter("email"));
-		dao.join(dto);
-		
-		out.println("<script>");
-		out.println("alert('회원가입이 완료되었습니다.')");	
-		out.println("</script>");
-		
-		response.sendRedirect("/index");
-		
+		request.setAttribute("jo", jo);
+		RequestDispatcher dis = request.getRequestDispatcher("join.jsp");
+		dis.forward(request, response);
 	}
 	
 }

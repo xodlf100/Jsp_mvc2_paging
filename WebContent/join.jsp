@@ -42,7 +42,7 @@
 						<div>MEMBER 회원가입</div>
 						<hr>
 					</div>
-					<form action="/join" method="post" class="login" name="frm1" onsubmit="return goCheck()">
+					<form action="/joinActionServlet" method="post" class="login" name="frm1" onsubmit="return goCheck()">
 						<div>ID (User name)</div>
 						<div>
 							<input type="text" name="id" class="idInput"/>

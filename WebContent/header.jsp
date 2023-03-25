@@ -42,7 +42,7 @@
 				 </form>
 			</div>
 			
-			<c:if test="${idd == null}">
+			<c:if test="${empty idd}">
 			<div class="header-right">
 				<a href='login.jsp' class="logR">로그인</a>
 				<a href='join.jsp'>회원가입</a>
@@ -50,7 +50,7 @@
 			</c:if>
 			
 
-			<c:if test="${idd != null}">
+			<c:if test="${!empty idd}">
 			<div class="header-right">
 				<p class="logRR">${idd}님 환영합니다.</p>
 				<a href="/logout" class="logR">로그아웃</a> 

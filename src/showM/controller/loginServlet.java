@@ -45,7 +45,7 @@ public class loginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60*10);
 			out.println("<script>");
 			out.println("alert('로그인 성공!')");
-			out.println("location.href='index.jsp'");
+			out.println("location.href='/index'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
