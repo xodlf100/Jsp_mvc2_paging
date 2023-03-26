@@ -99,6 +99,10 @@
 	margin-right: auto;
 }
 
+.content_li:nth-child(4n) {
+	margin-right: 0px;
+}
+
 
 .title1 {
 	padding-top: 1.1rem;

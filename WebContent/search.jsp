@@ -7,9 +7,6 @@
 <%
 	Dao dao = new Dao();
 	String id = (String)session.getAttribute("id");
-	if(id == null){
-		id = "guest";
-	}
 	String se = request.getParameter("keyword");
 	List<Dto> dto = dao.search(se);
 %>
@@ -37,24 +34,16 @@
 			<div class="inner row">
 				<div class="contents">
 					<ul class="content">
-						<%
-							for (int i = 0; i < dto.size(); i++) {
-								Dto a = dto.get(i);
-								DecimalFormat df = new DecimalFormat("###,###");
-								int str = a.getPrice();
-								String title3_price = df.format(str);
-						%>
-						<li class="content_li"><a href="./product.jsp?idx=<%=a.getIdx() %>"><img src="<%=a.getPicture()%>"
-								alt="<%=a.getTitle()%>" /></a>
-							<div class="title1"><%=a.getContents()%></div>
-							<div class="title2"><%=a.getTitle()%></div>
+						<c:forEach var="a" items="${ser}">					
+						<li class="content_li">
+							<a href="./product?idx=${a.idx}"><img src="${a.picture}" alt="${a.title}" /></a>
+							<div class="title1">${a.contents}</div>
+							<div class="title2">${a.title}</div>
 							<hr>
-							<div class="title3"><%=title3_price%>원
+							<div class="title3">${a.price}원
 							</div>
-							</li>
-						<%
-							}
-						%>
+						</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

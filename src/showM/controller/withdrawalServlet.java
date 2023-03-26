@@ -1,9 +1,8 @@
 package showM.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,33 +11,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import showM.Dao.Dao;
-import showM.Dto.Dto;
 
-
-
-@WebServlet("/index")
-public class indexServlet extends HttpServlet {
+@WebServlet("/withdrawal")
+public class withdrawalServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		Dao dao = new Dao();
-		List<Dto> dto = dao.select();
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		Dao dao = new Dao();
+		dao.Withdrawal(id);
 		
-		request.setAttribute("a", dto);
-		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
-		dis.forward(request, response);
+		out.println("<script>");
+		out.println("alert('탈퇴가 완료되었습니다.')");
+		out.println("location.href='/index'");
+		out.println("</script>");
 		
-		
+		session.invalidate();
 	}
 
 }

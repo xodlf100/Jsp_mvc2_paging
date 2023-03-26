@@ -1,6 +1,7 @@
 package showM.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,31 +15,33 @@ import javax.servlet.http.HttpSession;
 import showM.Dao.Dao;
 import showM.Dto.Dto;
 
-
-
-@WebServlet("/index")
-public class indexServlet extends HttpServlet {
+/**
+ * Servlet implementation class serahchServlet
+ */
+@WebServlet("/search")
+public class searchServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		Dao dao = new Dao();
-		List<Dto> dto = dao.select();
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		Dao dao = new Dao();
 		
-		request.setAttribute("a", dto);
-		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
+		String word = request.getParameter("keyword");
+		List<Dto> dto = dao.search(word);
+	
+		request.setAttribute("ser", dto);
+		RequestDispatcher dis = request.getRequestDispatcher("search.jsp");
 		dis.forward(request, response);
-		
-		
 	}
 
 }

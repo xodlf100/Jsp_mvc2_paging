@@ -48,7 +48,7 @@ public class Dao {
 				dtoo.setPicture(rs.getString(2));
 				dtoo.setTitle(rs.getString(3));
 				dtoo.setContents(rs.getString(4));
-				dtoo.setPrice(rs.getInt(5));
+				dtoo.setPrice(rs.getString(5));
 
 				dto.add(dtoo);
 			}
@@ -197,7 +197,7 @@ public class Dao {
 				dtoo.setPicture(rs.getString(2));
 				dtoo.setTitle(rs.getString(3));
 				dtoo.setContents(rs.getString(4));
-				dtoo.setPrice(rs.getInt(5));
+				dtoo.setPrice(rs.getString(5));
 				dto.add(dtoo);
 			}
 			con.close();
@@ -221,7 +221,7 @@ public class Dao {
 				dto.setPicture(rs.getString(2));
 				dto.setTitle(rs.getString(3));
 				dto.setContents(rs.getString(4));
-				dto.setPrice(rs.getInt(5));
+				dto.setPrice(rs.getString(5));
 			}
 			con.close();
 		} catch (Exception e) {
@@ -244,7 +244,7 @@ public class Dao {
 				dtoo.setPicture(rs.getString(2));
 				dtoo.setTitle(rs.getString(3));
 				dtoo.setContents(rs.getString(4));
-				dtoo.setPrice(rs.getInt(5));
+				dtoo.setPrice(rs.getString(5));
 				dto.add(dtoo);
 			}
 			con.close();

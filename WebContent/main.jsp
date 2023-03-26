@@ -46,7 +46,7 @@
 					<h2 class="weekly">WEEKLY BEST</h2>
 					<ul class="content">
 						<c:forEach var="pic" items="${a}">
-						<li class="content_li"><a href="./product.jsp?idx=${pic.idx}"><img src="${pic.picture}"
+						<li class="content_li"><a href="./product?idx=${pic.idx}"><img src="${pic.picture}"
 								alt="${pic.title}" /></a>
 							<div class="title1">${pic.contents}</div>
 							<div class="title2">${pic.title}</div>

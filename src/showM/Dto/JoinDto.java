@@ -42,6 +42,11 @@ public class JoinDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return "JoinDto [id=" + id + ", password=" + password + ", name=" + name + ", email=" + email + "]";
+	}
 	
 	
 	

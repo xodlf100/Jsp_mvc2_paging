@@ -4,16 +4,7 @@
 <%@page import="showM.Dao.Dao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	Dao dao = new Dao();
-	String id = (String)session.getAttribute("id");
-	if(id == null){
-		id = "guest";
-	}
-	String idx = request.getParameter("idx");
-	Dto dto = dao.getProduct(idx);
-	List<Dto> dtoo = dao.LimitSel();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,18 +31,13 @@
 		<div class="sec_contents">
 			<div class="contents">
 				<div class="main1">
-					<div class="main1_1"><img src="<%=dto.getPicture() %>" alt="asdf"></div>
+					<div class="main1_1"><img src="${dto.picture}" alt="5개 사진 항목"></div>
 					<p class="middle_text">WITH ITEM</p>
 					<hr>
 					<ul class="limitSel">
-					<%
-					for(int i=0; i < dtoo.size(); i++){
-						Dto a = dtoo.get(i);
-					%>
-						<a class="limitSel_li" href="product.jsp?idx=<%=a.getIdx()%>"><img src="<%=a.getPicture() %>" alt="WITH ITEM"></a>					
-					<%
-					}
-					%>	
+					<c:forEach var="pic" items="${dtoo}">
+						<a class="limitSel_li" href="product?idx=${pic.idx}"><img src="${pic.picture}" alt="WITH ITEM"></a>					
+					</c:forEach>	
 					</ul>
 					<hr>
 					<div class="benefit"><img src="./img/product.jpg" alt="product"></div>
@@ -62,15 +48,15 @@
 						<div class="detail">
 							<ul>
 								<li>상품명</li>
-								<li><%=dto.getTitle() %></li>
+								<li>${dto.title}</li>
 							</ul>
 							<ul>
 								<li>세부 사항</li>
-								<li><%=dto.getContents() %></li>
+								<li>${dto.contents}</li>
 							</ul>
 							<ul>
 								<li>price</li>
-								<li><%=dto.getPrice() %></li>
+								<li>${dto.price}</li>
 							</ul>
 							<ul>
 								<li>환불조건</li>

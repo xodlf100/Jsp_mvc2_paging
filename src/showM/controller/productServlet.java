@@ -11,34 +11,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import showM.Dao.Dao;
 import showM.Dto.Dto;
 
-
-
-@WebServlet("/index")
-public class indexServlet extends HttpServlet {
+/**
+ * Servlet implementation class productServlet
+ */
+@WebServlet("/product")
+public class productServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		Dao dao = new Dao();
-		List<Dto> dto = dao.select();
 		HttpSession session = request.getSession();
+		Dao dao = new Dao();
+		
 		String id = (String) session.getAttribute("id");
+		String idx = request.getParameter("idx");
 		
-		request.setAttribute("a", dto);
-		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
+		Dto dto = dao.getProduct(idx);
+		List<Dto> dtoo = dao.LimitSel();
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("dtoo", dtoo);
+		RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 		dis.forward(request, response);
-		
-		
+				
 	}
 
 }

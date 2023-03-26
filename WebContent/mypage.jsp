@@ -6,13 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<%
-	String id = (String) session.getAttribute("id");
-	request.setCharacterEncoding("UTF-8");
-	Dao dao = new Dao();
-	JoinDto dto = dao.getMember(id);
-	
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,19 +29,19 @@
 	<div class="wrap">
 		<%@include file="header.jsp"%>
 		<!-- header -->
-
+		
 		<div class="sec_contents">
 			<div class="inner row">
 				<div class="contents">
 					<div class="member">
 						<hr>
-						<div><%=dto.getId() %>님 환영합니다.</div>
+						<div>${a.id}님 환영합니다.</div>
 						<hr>
 					</div>
-					<form action="./mypageAction.jsp" method="post" class="login" name="frm1">
+					<form action="/mypageActionServlet" method="post" class="login" name="frm1">
 						<div>ID (User name)</div>
 						<div>
-							<input type="text" value="<%=dto.getId()%>"name="id" class="idInput" readonly/>
+							<input type="text" value="${a.id}"name="id" class="idInput" readonly/>
 						</div>
 						<div class="pass">Password</div>
 						<div>
@@ -56,11 +49,11 @@
 						</div>
 						<div>이름</div>
 						<div>
-							<input type="text" value="<%=dto.getName() %>" name="name" class="nameInput"/>
+							<input type="text" value="${a.name}" name="name" class="nameInput"/>
 						</div>
 						<div>email</div>
 						<div>
-							<input type="text" value="<%=dto.getEmail() %>" name="email" class="mail"/>
+							<input type="text" value="${a.email}" name="email" class="mail"/>
 						</div>
 						<div class="join">
 							<input type="submit" value="수정하기" class="btn btn-4" /> 
@@ -82,7 +75,7 @@
 <script>
 	function check(){
 		if(confirm("정말 탈퇴하시겠습니까?")){
-			location.href="WithdrawalAction.jsp";
+			location.href='/withdrawal';
 		} else {
 		}
 	}

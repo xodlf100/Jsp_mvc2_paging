@@ -47,6 +47,7 @@ public class loginServlet extends HttpServlet {
 			out.println("alert('로그인 성공!')");
 			out.println("location.href='/index'");
 			out.println("</script>");
+		
 		} else {
 			out.println("<script>");
 			out.println("alert('로그인 실패!')");

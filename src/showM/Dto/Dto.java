@@ -8,8 +8,7 @@ public class Dto {
 	private String picture;
 	private String title;
 	private String contents;
-	private int price;
-	
+	private String price;
 	
 	public int getIdx() {
 		return idx;
@@ -35,12 +34,14 @@ public class Dto {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Dto [idx=" + idx + ", picture=" + picture + ", title=" + title + ", contents=" + contents + ", price="
