@@ -1,15 +1,13 @@
 package showM.Dao;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
-
+import showM.Dto.BoardDto;
 import showM.Dto.Dto;
 import showM.Dto.JoinDto;
 
@@ -251,6 +249,45 @@ public class Dao {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		return dto;
+	}
+	
+	public void write(BoardDto dto) {
+		try {
+			getCon();
+			String sql = "insert into showm_mvc2_board values(?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getIdx());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getJoinName());
+			pstmt.setString(4, dto.getRegdate());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public List<BoardDto> boardSelectAll(){
+		List<BoardDto> dto = new ArrayList<>();
+		try {
+			getCon();
+			String sql = "select * from showm_mvc2_board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDto dtoo = new BoardDto();
+				dtoo.setIdx(rs.getInt(1));
+				dtoo.setTitle(rs.getString(2));
+				dtoo.setJoinName(rs.getString(3));
+				dtoo.setRegdate(rs.getString(4));
+				dto.add(dtoo);
+			}
+			con.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return dto;
 	}

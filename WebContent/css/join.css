@@ -20,7 +20,7 @@
 }
 
 .find {
-	width: 25%;
+	width: 31%;
 	display: flex;
 	justify-content: left;
 }
@@ -31,11 +31,16 @@
 	margin-left: 2%;
 }
 
+.gesi {
+	font-size: 1.6rem;
+	font-weight: bold;
+	padding-left: 2rem
+}
 .header-right {
 	font-size: 1.5rem;
     font-weight: bold;
 	display: flex;
-	width: 20%;
+	width: 15%;
 	justify-content: end;
 }
 

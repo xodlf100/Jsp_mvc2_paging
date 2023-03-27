@@ -39,7 +39,9 @@
 					 <i class="fa-solid fa-magnifying-glass"></i>
 					 </button>
 				 </form>
+				<a href="/board" class="gesi">게시판</a>
 			</div>
+			
 			
 			<c:if test="${empty id}">
 			<div class="header-right">
