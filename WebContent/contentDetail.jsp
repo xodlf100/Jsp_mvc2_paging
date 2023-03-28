@@ -14,7 +14,7 @@
 <title>게시판</title>
 <link rel="stylesheet" href="./css/reset.css" />
 <link rel="stylesheet" href="./css/common.css" />
-<link rel="stylesheet" href="./css/board.css" />
+<link rel="stylesheet" href="./css/contentDetail.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
 <style>
@@ -42,10 +42,10 @@
 	    height: 300px;
 	}
 	
-	.title {
+	.list {
 	    width: 100%;
     	height: 25px;	
-   	    margin-bottom: 5%;
+   	    margin-bottom: 2%;
 	}
 	
 	.content {
@@ -53,8 +53,13 @@
     	height: 400px;	
 	}
 	
-	.btn1 {
-		float: right;
+	.btnList {
+		display: flex;
+    	justify-content: flex-end;
+	}
+	
+	.btnList button:nth-child(2) {
+		margin: 0 1rem 0 1rem;
 	}
 	</style>
 <body>
@@ -66,11 +71,17 @@
 			<div class="inner row">
 				<div class="contents">
 					<div class="center">
-						<form action="/writeAction" method="post" class="form1">
-							title <br><input type="text" name="title" class="title"/><br>
-							comment <br><textarea name="content" class="content" rows="10"></textarea><br>
-							<input type="hidden" name="joinName" />
-							<button type="submit" class="btn1">작성</button>
+						<form action="/contentUpdate" method="get" class="form1">
+							<input type="hidden" name="idx" value="${a.idx}" />
+							title <br><input type="text" name="title" class="list" value="${a.title}" /><br>
+							ID <br><input type="text" name="joinName" class="list" value="${a.joinName}" readonly/><br>
+							Date <br><input type="text" name="regdate" class="list" value="${fn:substring(a.regdate,0,16)}" readonly/><br>
+							comment <br><textarea name="content" class="content" rows="10" >${a.content}</textarea><br>
+							<div class="btnList">
+							<button type="submit">수정</button>
+							<button><a href="/board">목록</a></button>
+							<button><a href="/contentDetailDelete">삭제</a></button>
+							</div>
 						</form>
 					</div>
 				</div>

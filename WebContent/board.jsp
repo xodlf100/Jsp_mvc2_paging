@@ -62,14 +62,15 @@
 		width: 5%;
 	}
 	.head li:nth-child(2){
-		width: 70%;
-		padding-left: 37rem;
+		width: 65%;
+  	  	padding-left: 32rem;
 	}
 	.head li:nth-child(3){
-		width: 10%;
+	    width: 7%;
+	    margin-right: 4rem;
 	}
 	.head li:nth-child(4){
-		width: 8%;
+		width: 10%;
 	}
 	
 	.main li:nth-child(1){
@@ -83,7 +84,7 @@
 		width: 10%;
 	}
 	.main li:nth-child(4){
-		width: 8%;
+		width: 11%;
 	}
 </style>
 <body>
@@ -103,9 +104,9 @@
 					<c:forEach var="pic" items="${a}">
 					<ul class="main">
 						<li>${pic.idx}</li>
-						<li>${pic.title }</li>
+						<li><a href="/contentDetail?idx=${pic.idx}">${pic.title }</a></li>
 						<li>${pic.joinName}</li>
-						<li>${fn:split(pic.regdate, " ")[0]}</li>
+						<li>${fn:substring(pic.regdate,0,16)}</li>
 					</ul>
 					</c:forEach>
 				</div>

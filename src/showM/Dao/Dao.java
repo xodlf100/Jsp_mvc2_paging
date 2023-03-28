@@ -31,7 +31,7 @@ public class Dao {
 		}
 	}
 
-	// 전체 데이터 가져오기
+	// 판매 상품 전체 데이터 가져오기
 	public List<Dto> select() {
 		List<Dto> dto = new ArrayList<>();
 		getCon();
@@ -78,7 +78,7 @@ public class Dao {
 		}
 	}
 
-	// 전체 데이터 가져오기
+	// 회원리스트 전체  데이터 가져오기
 	public List<JoinDto> check() {
 		List<JoinDto> jo = new ArrayList<>();
 		getCon();
@@ -126,7 +126,7 @@ public class Dao {
 		return result;
 	}
 	
-	//id를 통해 전체 값 불러오기
+	//id를 통해 회원 전체 데이터 불러오기
 	public JoinDto getMember(String id) {
 		getCon();
 		JoinDto dto = null; //객체 레퍼런스 생성
@@ -152,7 +152,7 @@ public class Dao {
 		return dto;
 	}
 	
-	// 정보 업데이트
+	// 회원 정보 업데이트
 	public void myUpdate(JoinDto dto) {
 		try {
 			getCon();
@@ -228,6 +228,7 @@ public class Dao {
 		return dto;
 	}
 	
+	// 키워드 받아 상품 검색
 	public List<Dto> search(String keyword){
 		List<Dto> dto = new ArrayList<>();
 		try {
@@ -253,22 +254,24 @@ public class Dao {
 		return dto;
 	}
 	
+	// 게시판 글쓰기
 	public void write(BoardDto dto) {
 		try {
 			getCon();
-			String sql = "insert into showm_mvc2_board values(?,?,?,?)";
+			String sql = "insert into showm_mvc2_board (title, joinName, content) values(?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, dto.getIdx());
-			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getJoinName());
-			pstmt.setString(4, dto.getRegdate());
-			
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getJoinName());
+			pstmt.setString(3, dto.getContent());
 			pstmt.executeUpdate();
+		
+			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 	
+	// 게시판 데이터 전체 불러오기
 	public List<BoardDto> boardSelectAll(){
 		List<BoardDto> dto = new ArrayList<>();
 		try {
@@ -290,6 +293,55 @@ public class Dao {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+	
+	// 게시판 클릭해서 상세 내용 보기
+	public BoardDto contentDetail(String idx){
+		BoardDto dto = new BoardDto();
+		try {
+			getCon();
+			String sql = "select * from showm_mvc2_board where idx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dto.setIdx(rs.getInt(1));
+				dto.setTitle(rs.getString(2));
+				dto.setJoinName(rs.getString(3));
+				dto.setRegdate(rs.getString(4));
+				dto.setContent(rs.getString(5));
+			}
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	// 게시판 수정
+	public void contentUpdate(BoardDto dto, String idx) {
+		try {
+			getCon();
+			String sql = "update showm_mvc2_board set title = ?, regdate = now(), content = ? where idx = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, idx);
+			pstmt.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 게시판 삭제
+	public void contentDetailDelete(String idx) {
+		try {
+			getCon();
+			String sql = "";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {

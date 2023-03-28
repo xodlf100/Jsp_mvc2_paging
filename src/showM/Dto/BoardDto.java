@@ -9,8 +9,8 @@ public class BoardDto {
 	private int idx;
 	private String title;
 	private String joinName;
+	private String content; 
 	private String regdate;
-	
 	public int getIdx() {
 		return idx;
 	}
@@ -29,16 +29,22 @@ public class BoardDto {
 	public void setJoinName(String joinName) {
 		this.joinName = joinName;
 	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getRegdate() {
 		return regdate;
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
 	@Override
 	public String toString() {
-		return "BoardDto [idx=" + idx + ", title=" + title + ", joinName=" + joinName + ", regdate=" + regdate + "]";
+		return "BoardDto [idx=" + idx + ", title=" + title + ", joinName=" + joinName + ", content=" + content
+				+ ", regdate=" + regdate + "]";
 	}
 	
 	

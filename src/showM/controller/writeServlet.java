@@ -2,6 +2,7 @@ package showM.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import showM.Dao.Dao;
+import showM.Dto.BoardDto;
 
 @WebServlet("/write")
 public class writeServlet extends HttpServlet {
@@ -26,8 +28,11 @@ public class writeServlet extends HttpServlet {
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charser=UTF-8");
 		HttpSession session = request.getSession();
-		String id = (String) request.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 		Dao dao = new Dao();
+		
+		RequestDispatcher dis = request.getRequestDispatcher("write.jsp");
+		dis.forward(request, response);
 		
 	}
 
