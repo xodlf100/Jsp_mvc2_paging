@@ -121,18 +121,29 @@
 	
 		
 	function idCheck(){
+			let list = new Array();
+	        <c:forEach items="${user}" var="user">
+	        list.push("${user.id}");
+	        </c:forEach>
+	        
 			var idValue = id.value;
-			console.log(${idAll})
-					if(idValue == ${idAll}){
+			
+			for(var i = 0; i < list.length; i++){
+					if(idValue == list[i]){
 						alert('아이디가 존재합니다.');
 						return
 					}
-					
 					if(idValue == "") {
 						alert("아이디를 입력해주세요.");
 						return
 					}
-				
+					
+					if(idValue == " ") {
+						alert("공백은 불가능합니다.");
+						return
+					}
+			}
+			
 			
 			alert('회원가입이 가능합니다.');
 			flag = true 

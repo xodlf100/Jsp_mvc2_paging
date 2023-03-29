@@ -36,10 +36,9 @@ public class joinServlet extends HttpServlet {
 		List<JoinDto> dto = dao.idAll();
 		
 		request.setAttribute("jo", jo);
-		request.setAttribute("idAll", dto);
-		System.out.println(dto);
+		request.setAttribute("user", dto);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("join.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("join.jsp"); 	
 		dis.forward(request, response);
 	}
 	
