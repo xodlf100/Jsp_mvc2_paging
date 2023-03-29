@@ -15,7 +15,7 @@ import showM.Dao.Dao;
  * Servlet implementation class contentDetailDelete
  */
 @WebServlet("/contentDetailDelete")
-public class contentDetailDelete extends HttpServlet {
+public class contentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,10 @@ public class contentDetailDelete extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		Dao dao = new Dao();
+		String idx = request.getParameter("idx");
 		
+		dao.contentDetailDelete(idx);
+		response.sendRedirect("board.jsp");
 	}
 
 }

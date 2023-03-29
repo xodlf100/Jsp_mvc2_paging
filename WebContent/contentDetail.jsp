@@ -5,6 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,8 +63,49 @@
 	.btnList button:nth-child(2) {
 		margin: 0 1rem 0 1rem;
 	}
+	
+	.custom-btn {
+	  width: 130px;
+	  height: 40px;
+	  padding: 10px 25px;
+	  border: 2px solid #000;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	}
+	
+	.btn-11 {
+	  overflow: hidden;
+	  transition: all 0.3s ease;
+	}
+	.btn-11:hover {
+	   background: #000;
+	  color: #fff;
+	}
+	.btn-11:before {
+	    position: absolute;
+	    content: '';
+	    display: inline-block;
+	    top: -180px;
+	    left: 0;
+	    width: 30px;
+	    height: 100%;
+	    background-color: #fff;
+	    animation: shiny-btn1 3s ease-in-out infinite;
+	}
+	.btn-11:active{
+	  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+	              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+	    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+	    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+	}
 	</style>
 <body>
+
 	<div class="wrap">
 		<%@include file="header.jsp"%>
 		<!-- header -->
@@ -71,6 +114,7 @@
 			<div class="inner row">
 				<div class="contents">
 					<div class="center">
+						<c:if test="${id eq a.joinName}">
 						<form action="/contentUpdate" method="get" class="form1">
 							<input type="hidden" name="idx" value="${a.idx}" />
 							title <br><input type="text" name="title" class="list" value="${a.title}" /><br>
@@ -78,11 +122,24 @@
 							Date <br><input type="text" name="regdate" class="list" value="${fn:substring(a.regdate,0,16)}" readonly/><br>
 							comment <br><textarea name="content" class="content" rows="10" >${a.content}</textarea><br>
 							<div class="btnList">
-							<button type="submit">수정</button>
-							<button><a href="/board">목록</a></button>
-							<button><a href="/contentDetailDelete">삭제</a></button>
+							<button type="submit" class="btn1 custom-btn btn-11">수정</button>
+							<button onclick="/board" class="btn1 custom-btn btn-11">목록</button>
+							<button onclick="return check()" class="btn1 custom-btn btn-11">삭제</button>
 							</div>
 						</form>
+						</c:if>
+						<c:if test="${empty id}">
+						<form action="/contentUpdate" method="get" class="form1">
+							<input type="hidden" name="idx" value="${a.idx}" />
+							title <br><input type="text" name="title" class="list" value="${a.title}" readonly/><br>
+							ID <br><input type="text" name="joinName" class="list" value="${a.joinName}" readonly/><br>
+							Date <br><input type="text" name="regdate" class="list" value="${fn:substring(a.regdate,0,16)}" readonly/><br>
+							comment <br><textarea name="content" class="content" rows="10" readonly>${a.content}</textarea><br>
+							<div class="btnList">
+							<button onclick="/board" class="btn1 custom-btn btn-11">목록</button>
+							</div>
+						</form>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -97,7 +154,17 @@
 	</div>
 	<!-- wrap -->
 	
+	<script>
 	
+	function check(){
+		if(confirm("삭제하시겠습니까?")){
+			location.href='/contentDetailDelete?idx=${a.idx}'
+		} else {
+			return false;
+		}
+	}
+	
+	</script>
 	
 </body>
 </html>

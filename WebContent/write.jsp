@@ -56,6 +56,58 @@
 	.btn1 {
 		float: right;
 	}
+	
+		.custom-btn {
+	  width: 130px;
+	  height: 40px;
+	  padding: 10px 25px;
+	  border: 2px solid #000;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	}
+	
+	.btn-11 {
+	  overflow: hidden;
+	  transition: all 0.3s ease;
+	}
+	.btn-11:hover {
+	   background: #000;
+	  color: #fff;
+	}
+	.btn-11:before {
+	    position: absolute;
+	    content: '';
+	    display: inline-block;
+	    top: -180px;
+	    left: 0;
+	    width: 30px;
+	    height: 100%;
+	    background-color: #fff;
+	    animation: shiny-btn1 3s ease-in-out infinite;
+	}
+	.btn-11:active{
+	  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+	              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+	    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+	    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+	}
+
+
+@-webkit-keyframes shiny-btn1 {
+    0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+    80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+    81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+    100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
+.form1  button:nth-child(8) {
+	margin-left: 1rem;
+}
 	</style>
 <body>
 	<div class="wrap">
@@ -70,8 +122,9 @@
 							title <br><input type="text" name="title" class="title"/><br>
 							comment <br><textarea name="content" class="content" rows="10"></textarea><br>
 							<input type="hidden" name="joinName" />
-							<button type="submit" class="btn1">작성</button>
+							<button type="submit" class="btn1 custom-btn btn-11" onclick="return check()">작성</button>
 						</form>
+							<button class="btn1 custom-btn btn-11" onclick="location.href='/board'">이전</button>
 					</div>
 				</div>
 			</div>
@@ -81,12 +134,29 @@
 		<%@include file="footer.jsp"%>
 		<!-- footer -->
 
-
-
 	</div>
 	<!-- wrap -->
 	
+	<c:if test="${empty id}">
+	<script>
+	alert("세선이 만료되었습니다.");
+	location.href="/index";
+	</script>
+	</c:if>
+
 	
+	<script>
+	let title = document.querySelector('.title')
+	let titleValue;
+	function check(){	
+		titleValue = title.value;
+		if(titleValue == ""){
+			alert("제목을 입력해주세요.");
+			title.focus();
+			return false;
+		}
+	}
+	</script>
 	
 </body>
 </html>

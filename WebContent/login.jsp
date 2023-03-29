@@ -38,7 +38,7 @@
 					<form action="/login" method="post" class="login">
 						<div>ID (User name)</div>
 						<div>
-							<input type="text" name="id"/>
+							<input type="text" name="id" class="id"/>
 						</div>
 						<div class="pass">Password</div>
 						<div>
@@ -59,5 +59,13 @@
 
 	</div>
 	<!-- wrap -->
+	
+	<script>
+	const id = document.querySelector('.id');
+	function idFocus(){
+		id.focus();
+	}
+	idFocus();
+	</script>
 </body>
 </html>

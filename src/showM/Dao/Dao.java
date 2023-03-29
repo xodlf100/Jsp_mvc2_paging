@@ -338,10 +338,33 @@ public class Dao {
 	public void contentDetailDelete(String idx) {
 		try {
 			getCon();
-			String sql = "";
+			String sql = "delete from showm_mvc2_board where idx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			pstmt.executeUpdate();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 회원 정보에서 id만 가져오기
+	public List<JoinDto> idAll() {
+		List<JoinDto> dto = new ArrayList<>();
+		try {
+			getCon();
+			String sql = "select id from showm_mvc2_join";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JoinDto dtoo = new JoinDto();
+				dtoo.setId(rs.getString(1));
+				dto.add(dtoo);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dto;
 	}
 	
 	public static void main(String[] args) {

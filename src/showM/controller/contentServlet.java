@@ -38,6 +38,7 @@ public class contentServlet extends HttpServlet {
 		BoardDto dto = dao.contentDetail(idx);
 		
 		request.setAttribute("a", dto);
+		request.setAttribute("id", id);
 		RequestDispatcher dis = request.getRequestDispatcher("contentDetail.jsp");
 		dis.forward(request, response);
 	}

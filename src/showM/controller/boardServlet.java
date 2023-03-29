@@ -27,12 +27,13 @@ public class boardServlet extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		Dao dao = new Dao();
 		List<BoardDto> dto = dao.boardSelectAll();
 		request.setAttribute("a", dto);
+		request.setAttribute("id", id);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("board.jsp");
 		dis.forward(request, response);

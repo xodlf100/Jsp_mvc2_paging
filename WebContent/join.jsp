@@ -73,7 +73,6 @@
 
 		<%@include file="footer.jsp"%>
 		<!-- footer -->
-
 	</div>
 
 	<!-- wrap -->
@@ -120,13 +119,11 @@
 	
 	
 	
-	
-	
+		
 	function idCheck(){
 			var idValue = id.value;
-			
-				<c:forEach var="check" items="${jo}">	
-					if(idValue == ${check.id}){
+			console.log(${idAll})
+					if(idValue == ${idAll}){
 						alert('아이디가 존재합니다.');
 						return
 					}
@@ -135,12 +132,14 @@
 						alert("아이디를 입력해주세요.");
 						return
 					}
-				</c:forEach>
 				
 			
 			alert('회원가입이 가능합니다.');
-			flag = true
+			flag = true 
+			// if를 탈출하고 flag가 true로 바뀌는 순간 88번 라인의 메소드가 flase -> true 풀리게 되면서 함수 실행.
+		
 	}
+	
 </script>
 </body>
 </html>

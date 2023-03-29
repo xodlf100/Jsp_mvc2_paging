@@ -31,6 +31,7 @@ public class writeServlet extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		Dao dao = new Dao();
 		
+		request.setAttribute("id", id);
 		RequestDispatcher dis = request.getRequestDispatcher("write.jsp");
 		dis.forward(request, response);
 		

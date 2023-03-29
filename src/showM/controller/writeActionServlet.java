@@ -26,7 +26,7 @@ public class writeActionServlet extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charser=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		Dao dao = new Dao();
@@ -38,7 +38,6 @@ public class writeActionServlet extends HttpServlet {
 		dto.setContent(request.getParameter("content"));
 		
 		dao.write(dto);
-		System.out.println(dto);
 		response.sendRedirect("/board");
 	}
 

@@ -33,8 +33,12 @@ public class joinServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Dao dao = new Dao();
 		List<JoinDto> jo = dao.check();
+		List<JoinDto> dto = dao.idAll();
 		
 		request.setAttribute("jo", jo);
+		request.setAttribute("idAll", dto);
+		System.out.println(dto);
+		
 		RequestDispatcher dis = request.getRequestDispatcher("join.jsp");
 		dis.forward(request, response);
 	}
