@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import showM.Dto.BoardDto;
 import showM.Dto.Dto;
 import showM.Dto.JoinDto;
+import showM.Dto.Paging;
 
 public class Dao {
 
@@ -272,12 +274,14 @@ public class Dao {
 	}
 	
 	// 게시판 데이터 전체 불러오기
-	public List<BoardDto> boardSelectAll(){
+	public List<BoardDto> boardSelectAll(Paging paging){
 		List<BoardDto> dto = new ArrayList<>();
 		try {
 			getCon();
-			String sql = "select * from showm_mvc2_board";
+			String sql = "select * from showm_mvc2_board LIMIT ?, ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, paging.getStartValue());
+			pstmt.setInt(2, paging.getPerPageNum());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDto dtoo = new BoardDto();
@@ -293,6 +297,24 @@ public class Dao {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+	
+	public int boardAll(){
+		int result = 0;
+		try {
+			getCon();
+			String sql = "select count(*) from showm_mvc2_board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			con.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	// 게시판 클릭해서 상세 내용 보기
@@ -366,6 +388,43 @@ public class Dao {
 		}
 		return dto;
 	}
+
+	
+	
+	
+	
+	
+public List<BoardDto> selectAllMember(int page){
+        //1번 페이지 1~10
+        //2번 페이지 11~20        
+        int startNum = (page-1)*10+1;
+        int endNum = page*10;
+        String sql = "select R1. * from("
+        		+ "select * from showm_mvc2_board order by idx asc)"
+        		+ "R1 LIMIT ?, ?";
+        List<BoardDto> list = new ArrayList<>();
+        try{
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, startNum);
+            pstmt.setInt(2, endNum);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+            	BoardDto vo = new BoardDto();
+                vo.setIdx(rs.getInt("idx"));
+                vo.setTitle(rs.getString("title"));
+                vo.setJoinName(rs.getString("joinName"));
+                vo.setRegdate(rs.getString("regdate"));
+                vo.setContent(rs.getString("content"));
+                list.add(vo);
+            }
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+        }
+        return list;
+    }
+
 	
 	public static void main(String[] args) {
 		Dao dao = new Dao();

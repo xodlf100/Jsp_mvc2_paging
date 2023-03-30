@@ -11,6 +11,7 @@ public class BoardDto {
 	private String joinName;
 	private String content; 
 	private String regdate;
+	
 	public int getIdx() {
 		return idx;
 	}

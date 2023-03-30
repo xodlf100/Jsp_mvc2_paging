@@ -23,111 +23,27 @@
 		background: #faf6f6f8;
 	}
 	
-	.sec_contents {
-		height: 800px;
+	.under {
+	    display: flex;
+   		justify-content: center;
+   		margin-top: 1rem;
 	}
-	
-	.contents {
-		border: 1px solid black;
-	    width: 60%;
-    	height: 500px;
-   	    margin: 10rem auto 0 auto;
-	}
-	
-	.head {
+	.underPage {
 		display: flex;
-		justify-content: space-between;
-	    height: 40px;
-	    font-size: 1.8rem;
+	}
+	
+	.underPage li a {
+		padding: 2rem;
+		font-size: 1.6rem;
+	}
+	
+	.btnn {
+		font-size: 1.5rem;
 	    font-weight: bold;
-	    padding: 0.5rem 2rem 0.5rem 2rem;
-        background: #777;
-  	  	color: #fff;
-        
+	    background: #CCB;
+	    border-radius: 20px;
+	   
 	}
-	
-	.main {
-		display: flex;
-    	justify-content: space-between;
-    	font-size: 1.5rem;
-    	padding: 0.5rem 2rem 0.5rem 3rem;
-    	margin-bottom: 0.5rem;
-	}
-	
-	.BtnM {
-		width: 26.88%;
-		margin: 2rem 0 0 auto;
-	}
-	
-	.head li:nth-child(1){
-		width: 5%;
-	}
-	.head li:nth-child(2){
-		width: 65%;
-  	  	padding-left: 35.2rem;
-	}
-	.head li:nth-child(3){
-	    width: 7%;
-	    margin-right: 4rem;
-	}
-	.head li:nth-child(4){
-		width: 10%;
-	}
-	
-	.main li:nth-child(1){
-		width: 5%;
-	}
-	.main li:nth-child(2){
-		width: 70%;
-		text-align: center;
-	}
-	.main li:nth-child(3){
-		width: 10%;
-	}
-	.main li:nth-child(4){
-		width: 11%;
-	}
-	
-	.custom-btn {
-	  width: 130px;
-	  height: 40px;
-	  padding: 10px 25px;
-	  border: 2px solid #000;
-	  font-family: 'Lato', sans-serif;
-	  font-weight: 500;
-	  background: transparent;
-	  cursor: pointer;
-	  transition: all 0.3s ease;
-	  position: relative;
-	  display: inline-block;
-	}
-	
-	.btn-11 {
-	  overflow: hidden;
-	  transition: all 0.3s ease;
-	}
-	.btn-11:hover {
-	   background: #000;
-	  color: #fff;
-	}
-	.btn-11:before {
-	    position: absolute;
-	    content: '';
-	    display: inline-block;
-	    top: -180px;
-	    left: 0;
-	    width: 30px;
-	    height: 100%;
-	    background-color: #fff;
-	    animation: shiny-btn1 3s ease-in-out infinite;
-	}
-	.btn-11:active{
-	  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-	              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-	    inset -4px -4px 6px 0 rgba(255,255,255,.2),
-	    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
-	}
-	
 </style>
 <body>
 	<div class="wrap">
@@ -153,6 +69,19 @@
 						<hr>
 					</c:forEach>
 				</div>
+				<div class="under">
+					<c:if test="${paging.prev}">
+					<a href="${path}/board?pageNum=${paging.startNum - 1}" class="btnn">이전</a>
+					</c:if>
+					<ul class="underPage">
+					<c:forEach begin="${paging.startNum}" end="${paging.endNum}" var="i">
+						<li><a href="${path}/board?pageNum=${i}">${i}</a></li>
+					</c:forEach>
+					</ul>
+					<c:if test="${paging.next}">
+					<a href="${path}/board?pageNum=${paging.endNum + 1}" class="btnn">다음</a>
+					</c:if>
+				</div>
 				<div class="BtnM">
 				<button onclick="check()" class="btn1 custom-btn btn-11">글쓰기</button>
 				</div>
@@ -162,11 +91,6 @@
 
 		<%@include file="footer.jsp"%>
 		<!-- footer -->
-
-
-
-	
-
 	</div>
 	<!-- wrap -->
 	
